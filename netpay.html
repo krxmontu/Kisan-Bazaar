@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisan Bazaar - Net Banking Payment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .bank-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .bank-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .bank-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .redirect-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .redirect-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .small-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            width: 25%;
+            margin: 0 5px;
+        }
+
+        .small-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Net Banking Payment</h1>
+
+        <input type="text" class="search-box" id="bankSearch" placeholder="Search for your bank...">
+
+        <div class="bank-list" id="bankList">
+        </div>
+
+        <a href="#" id="redirectBtn" class="redirect-btn">Proceed to Net Banking</a>
+
+        <div class="button-group">
+            <a href="checkout.html" class="small-btn">Back to Checkout</a>
+            <a href="index.html" class="small-btn">Home Page</a>
+        </div>
+
+        <div class="instructions">
+            <p>Select your bank from the list above and click the button to proceed to the official Net Banking page.</p>
+        </div>
+    </div>
+
+    <script>
+        const banks = [
+            { name: 'State Bank of India (SBI)', url: 'https://retail.onlinesbi.sbi/' },
+            { name: 'HDFC Bank', url: 'https://netbanking.hdfcbank.com/netbanking/' },
+            { name: 'ICICI Bank', url: 'https://www.icicibank.com/' },
+            { name: 'Axis Bank', url: 'https://www.axisbank.com/' },
+            { name: 'Punjab National Bank (PNB)', url: 'https://netpnb.com/' },
+            { name: 'Kotak Mahindra Bank', url: 'https://www.kotak.com/' },
+            { name: 'Bank of Baroda', url: 'https://www.bobibanking.com/' },
+            { name: 'Canara Bank', url: 'https://www.canarabank.in/' },
+            { name: 'Yes Bank', url: 'https://www.yesbank.in/' },
+            { name: 'Union Bank of India', url: 'https://www.unionbankonline.co.in/' },
+            { name: 'IndusInd Bank', url: 'https://netbanking.indusind.com/' },
+            { name: 'IDFC First Bank', url: 'https://my.idfcfirstbank.com/login/index' },
+            { name: 'Bank of India', url: 'https://www.bankofindia.co.in/' },
+            { name: 'IDBI Bank', url: 'https://inet.idbibank.co.in/' },
+            { name: 'Central Bank of India', url: 'https://www.centralbankofindia.co.in/' },
+            { name: 'Indian Bank', url: 'https://www.indianbank.net.in/' },
+            { name: 'UCO Bank', url: 'https://www.ucoebanking.com/' },
+            { name: 'Federal Bank', url: 'https://www.federalbank.co.in/' },
+            { name: 'Bandhan Bank', url: 'https://bandhanbankonline.com/' },
+            { name: 'South Indian Bank', url: 'https://www.southindianbank.com/' },
+        ];
+
+        const bankListElement = document.getElementById('bankList');
+        const bankSearch = document.getElementById('bankSearch');
+        const redirectBtn = document.getElementById('redirectBtn');
+
+        let selectedBankUrl = '';
+
+        function displayBanks(banks) {
+            bankListElement.innerHTML = '';
+            banks.forEach(bank => {
+                const bankItem = document.createElement('div');
+                bankItem.className = 'bank-item';
+                bankItem.textContent = bank.name;
+                bankItem.addEventListener('click', () => {
+                    selectedBankUrl = bank.url;
+                    redirectBtn.href = selectedBankUrl;
+                    bankListElement.querySelectorAll('.bank-item').forEach(item => item.style.backgroundColor = '');
+                    bankItem.style.backgroundColor = '#007bff';
+                    bankItem.style.color = '#fff';
+                });
+                bankListElement.appendChild(bankItem);
+            });
+        }
+
+        displayBanks(banks);
+
+        bankSearch.addEventListener('input', () => {
+            const searchValue = bankSearch.value.toLowerCase();
+            const filteredBanks = banks.filter(bank => bank.name.toLowerCase().includes(searchValue));
+            displayBanks(filteredBanks);
+        });
+
+        redirectBtn.addEventListener('click', (e) => {
+            if (!selectedBankUrl) {
+                e.preventDefault();
+                alert('Please select a bank before proceeding.');
+            }
+        });
+    </script>
+</body>
+</html>

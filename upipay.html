@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 15px;
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+
+        .qr-code {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            background-color: #eee;
+            background-image: url('/img/upiqr.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .payment-apps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .payment-apps img {
+            width: 50px;
+            height: 35px;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .payment-apps img:hover {
+            transform: scale(1.1);
+        }
+
+        .instructions {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            width: 25%;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UPI Payment</h1>
+
+        <div class="timer" id="timer">Pay within 5:00 minutes</div>
+
+        <div class="qr-code"></div>
+
+        <div class="payment-apps">
+            <img src="/img/p1.png" alt="PhonePe">
+            <img src="/img/p2.png" alt="Google Pay">
+            <img src="/img/p3.png" alt="Paytm">
+        </div>
+
+        <div class="instructions">
+            <p>Scan the QR code using your preferred UPI app to complete the payment.</p>
+        </div>
+
+        <div class="btn-container">
+            <a href="checkout.html" class="btn">Back to Checkout</a>
+            <a href="index.html" class="btn">Home Page</a>
+        </div>
+    </div>
+
+    <script>
+        let time = 300; 
+        const timerElement = document.getElementById('timer');
+
+        const countdown = setInterval(() => {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timerElement.textContent = `Pay within ${minutes}:${seconds} minutes`;
+
+            if (time <= 0) {
+                clearInterval(countdown);
+                timerElement.textContent = "Time is up! Please refresh the page to try again.";
+                timerElement.style.color = "#dc3545"; 
+            }
+
+            time--;
+        }, 1000);
+    </script>
+</body>
+</html>

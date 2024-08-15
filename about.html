@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisan Bazaar - About</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+            text-decoration: none;
+        }
+
+        :root {
+
+            --main-color: #0c0d0c;
+            --text-color: #090909;
+            --bg-color: #fafafa;
+            --big-font: 5rem;
+            --h2-font: 2.25rem;
+            --p-font: 0.9rem;
+        }
+
+        *::selection {
+            background: var(--main-color);
+            color: #563737;
+        }
+
+
+        body {
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 170px;
+            background: var(--bg-color);
+        }
+
+        .logo {
+            color: var(--main-color);
+            font-weight: 600;
+            font-size: 2.4rem;
+        }
+
+        .navbar {
+            display: flex;
+        }
+
+        .navbar li {
+            list-style: none;
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            font-weight: 500;
+
+        }
+
+        .navbar a:hover {
+            color: rgb(16, 188, 53);
+            transition: .4s;
+        }
+
+        #menu-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar .number {
+
+            font-size: 20px;
+            color: #4f3c3c;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav ul {
+
+            display: flex;
+
+        }
+
+        nav ul li {
+            margin-left: 20px;
+
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            background-image: url('https://www.shutterstock.com/image-photo/image-rainladen-clouds-arriving-over-600nw-2097085765.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #f3f3f3;
+            padding: 150px 20px;
+
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .about h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .about p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about ul {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .about ul li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo">Kisan Bazaar</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class="navbar">
+            <li><a href="login.html">Login/Sign Up</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">About</a></li>
+            <li><a href="index.html">Products</a></li>
+            <li><a href="index.html">Service</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="number"><i class='bx bxs-phone'></i><strong>9876543210</strong></li>
+
+
+        </ul>
+
+    </header>
+
+    <section class="hero">
+
+    </section>
+
+    <section class="about">
+        <h3>About Us</h3>
+        <p>
+            At Kisan Bazaar, we are dedicated to transforming the way farmers connect with essential agricultural
+            products.
+            Our platform serves as a specialized marketplace designed exclusively for the agricultural sector,
+            simplifying the purchasing process and providing easy access to machinery, seeds, fertilizers, and more.
+        </p>
+        <h4>Our Mission</h4>
+        <p>
+            Our mission is to enhance the efficiency and productivity of farming operations by making high-quality
+            agricultural inputs readily accessible. We aim to reduce costs, save time, and ensure farmers have direct
+            access to trusted suppliers and quality products, all within a user-friendly interface.
+        </p>
+        <h4>What Sets Us Apart</h4>
+        <p>
+            Unlike general e-commerce platforms or broader agricultural apps, Kisan Bazaar is uniquely focused on
+            agriculture. Our platform is tailored specifically to meet the needs of farmers, offering a centralized and
+            easy-to-navigate marketplace.
+        </p>
+        <h4>Our Features</h4>
+        <ul>
+            <li>Product Catalog: Comprehensive listings of agricultural products, including machinery, seeds, and
+                fertilizers.</li>
+            <li>Search and Filter Options: Advanced search functionality to help farmers find specific products quickly.
+            </li>
+            <li>User Reviews and Ratings: Feedback from fellow farmers to guide purchasing decisions.</li>
+            <li>Secure Payment Gateway: Safe and reliable options for hassle-free transactions.</li>
+            <li>Order Tracking: Real-time updates on the status of orders.</li>
+            <li>Customer Support: Assistance via chat, email, or phone to resolve any queries or issues.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Join us at Kisan Bazaar, where farming meets innovation!</p>
+    </footer>
+</body>
+
+</html>

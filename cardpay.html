@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisan Bazaar - Credit Card Payment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .form-row .input-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            padding: 15px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .otp-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .otp-section .input-group {
+            width: 100%;
+        }
+
+        .timer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #d9534f;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            width: 25%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Card Payment</h1>
+
+        <form id="creditCardForm">
+            <div class="input-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="cardHolderName">Cardholder's Name</label>
+                <input type="text" id="cardHolderName" placeholder="Enter Name" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Pay Now</button>
+            <div class="error-message" id="errorMessage">Please fill in all fields correctly.</div>
+        </form>
+
+        <!-- OTP Section -->
+        <div class="otp-section" id="otpSection">
+            <div class="input-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" placeholder="123456" required>
+            </div>
+            <div class="timer" id="otpTimer">OTP valid for 01:30</div>
+            <button class="submit-btn" id="verifyOtpBtn">Verify OTP</button>
+        </div>
+
+        <!-- Button Container -->
+        <div class="btn-container">
+            <a href="checkout.html" class="btn">Back to Checkout</a>
+            <a href="index.html" class="btn">Home Page</a>
+        </div>
+    </div>
+
+    <script>
+    const form = document.getElementById('creditCardForm');
+    const cardNumber = document.getElementById('cardNumber');
+    const expiryDate = document.getElementById('expiryDate');
+    const cvv = document.getElementById('cvv');
+    const cardHolderName = document.getElementById('cardHolderName');
+    const errorMessage = document.getElementById('errorMessage');
+    const otpSection = document.getElementById('otpSection');
+    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+    const otpTimer = document.getElementById('otpTimer');
+
+    let otpTime = 90; 
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if (cardNumber.value === '' || expiryDate.value === '' || cvv.value === '' || cardHolderName.value === '') {
+            errorMessage.style.display = 'block';
+        } else {
+            errorMessage.style.display = 'none';
+            form.style.display = 'none'; 
+            otpSection.style.display = 'flex'; 
+
+            startOtpTimer();
+        }
+    });
+
+    verifyOtpBtn.addEventListener('click', function() {
+        const otpInput = document.getElementById('otp').value;
+
+        if (otpInput === '') {
+            alert('Please enter the OTP.');
+        } else {
+            alert('Payment Successful!');
+            window.location.href = 'index.html'; 
+        }
+    });
+
+    function startOtpTimer() {
+        const countdown = setInterval(() => {
+            let minutes = Math.floor(otpTime / 60);
+            let seconds = otpTime % 60;
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            otpTimer.textContent = `OTP valid for ${minutes}:${seconds}`;
+
+            if (otpTime <= 0) {
+                clearInterval(countdown);
+                otpTimer.textContent = "OTP expired! Please try again.";
+                otpTimer.style.color = "#dc3545"; 
+            }
+
+            otpTime--;
+        }, 1000);
+    }
+
+    cardNumber.addEventListener('input', function() {
+        cardNumber.value = cardNumber.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    cvv.addEventListener('input', function() {
+        cvv.value = cvv.value.replace(/\D/g, '');
+    });
+
+    expiryDate.addEventListener('input', function() {
+        expiryDate.value = expiryDate.value.replace(/\D/g, '').replace(/(\d{2})(\d{1,2})/, '$1/$2');
+    });
+
+    document.getElementById('otp').addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, ''); 
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisan Bazaar - Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .payment-box {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            background-color: #f9f9f9;
+            margin: 0 15px;
+        }
+
+        .payment-box input[type="radio"] {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+
+        .payment-box label {
+            display: block;
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .payment-box:hover {
+            background-color: #e6e6e6;
+        }
+
+        .payment-box input[type="radio"]:checked + label {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007bff;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+
+        .checkout-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .address-list {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .address-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            color: #333;
+        }
+
+        .address-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+
+        <!-- Address Section -->
+        <div class="section">
+            <h2>Shipping Address</h2>
+            <form id="addressForm">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <input type="text" id="addressLine1" placeholder="Address Line 1" required>
+                <input type="text" id="addressLine2" placeholder="Address Line 2">
+                <input type="text" id="city" placeholder="City" required>
+                <input type="text" id="state" placeholder="State" required>
+                <input type="text" id="zip" placeholder="ZIP Code" required>
+                <button type="submit">Add Address</button>
+            </form>
+
+           
+            <div class="address-list" id="addressList"></div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="section">
+            <h2>Payment Options</h2>
+            <div class="payment-options">
+                <div class="payment-box">
+                    <input type="radio" name="payment" value="UPI" id="upi">
+                    <label for="upi">UPI</label>
+                </div>
+                <div class="payment-box">
+                    <input type="radio" name="payment" value="Net Banking" id="netBanking">
+                    <label for="netBanking">Net Banking</label>
+                </div>
+                <div class="payment-box">
+                    <input type="radio" name="payment" value="Credit Card" id="creditCard">
+                    <label for="creditCard">Credit Card</label>
+                </div>
+            </div>
+        </div>
+
+        <button class="checkout-btn">Proceed to Payment</button>
+    </div>
+
+    <script>
+       
+        document.getElementById('addressForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+           
+            const fullName = document.getElementById('fullName').value;
+            const addressLine1 = document.getElementById('addressLine1').value;
+            const addressLine2 = document.getElementById('addressLine2').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+
+           
+            const addressItem = document.createElement('div');
+            addressItem.className = 'address-item';
+            addressItem.innerHTML = `
+                <strong>${fullName}</strong><br>
+                ${addressLine1}<br>
+                ${addressLine2 ? addressLine2 + '<br>' : ''}
+                ${city}, ${state}, ${zip}
+            `;
+
+            
+            document.getElementById('addressList').appendChild(addressItem);
+
+            
+            document.getElementById('addressForm').reset();
+        });
+
+        
+        document.querySelector('.checkout-btn').addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+           
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
+            
+            if (selectedPayment) {
+                let paymentURL = '#'; 
+
+                switch (selectedPayment.value) {
+                    case 'UPI':
+                        paymentURL = 'upipay.html'; 
+                        break;
+                    case 'Net Banking':
+                        paymentURL = 'netpay.html';
+                        break;
+                    case 'Credit Card':
+                        paymentURL = 'cardpay.html'; 
+                        break;
+                    default:
+                        break;
+                }
+
+                
+                window.location.href = paymentURL;
+            } else {
+                alert('Please select a payment option before proceeding.');
+            }
+        });
+    </script>
+</body>
+</html>

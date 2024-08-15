@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px; 
+        }
+
+        .order-summary {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .order-summary h2 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        .order-summary p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .tracking-steps {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .step:hover {
+            background-color: #e9ecef;
+        }
+
+        .step.completed {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .step .icon {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .step.completed .icon {
+            background-color: #28a745;
+        }
+
+        .step .details {
+            flex-grow: 1;
+        }
+
+        .step .details h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .step .details p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .step .time {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .expanded-details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .expanded-details p {
+            margin-bottom: 10px; 
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-group a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .button-group .back-btn {
+            background-color: #6c757d;
+        }
+
+        .button-group .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .button-group .home-btn {
+            background-color: #28a745;
+        }
+
+        .button-group .home-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Track Your Order</h1>
+
+        <!-- Order Summary Section -->
+        <div class="order-summary">
+            <h2>Order #12345</h2>
+            <p>Product: Battery Sprayer</p>
+            <p>Estimated Arrival: 25 August 2024</p>
+        </div>
+
+        <!-- Tracking Steps Section -->
+        <div class="tracking-steps">
+            <div class="step completed">
+                <div class="icon">✓</div>
+                <div class="details">
+                    <h3>Order Placed</h3>
+                    <p>Your order has been placed successfully.</p>
+                </div>
+                <div class="time">15 August 2024, 10:00 AM</div>
+            </div>
+
+            <div class="step completed">
+                <div class="icon">✓</div>
+                <div class="details">
+                    <h3>Dispatched from Warehouse</h3>
+                    <p>Your order has left the warehouse and is on the way.</p>
+                    <div class="expanded-details">
+                        <p>&nbsp Delhi - 16 August 2024, 10:00 AM</p>
+                        <p>&nbsp Lucknow - 16 August 2024, 04:00 PM</p>
+                        <p>&nbsp Kolkata - 17 August 2024, 09:00 AM</p>
+                        <p>&nbsp Guwahati - 17 August 2024, 01:00 PM</p>
+                       
+                    </div>
+                </div>
+                <div class="time">16 August 2024, 02:00 PM</div>
+            </div>
+
+            <div class="step">
+                <div class="icon">⌛</div>
+                <div class="details">
+                    <h3>Out for Delivery</h3>
+                    <p>Your order is out for delivery.</p>
+                </div>
+                <div class="time">25 August 2024, 08:00 AM</div>
+            </div>
+
+            <div class="step">
+                <div class="icon">⌛</div>
+                <div class="details">
+                    <h3>Delivered</h3>
+                    <p>Your order will be delivered to the destination.</p>
+                </div>
+                <div class="time">Expected by 25 August 2024, 05:00 PM</div>
+            </div>
+        </div>
+
+        <!-- Button Group -->
+        <div class="button-group">
+            <a href="order.html" class="back-btn">Go Back</a>
+            <a href="index.html" class="home-btn">Go to Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
